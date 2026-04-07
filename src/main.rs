@@ -1,3 +1,5 @@
+#![cfg_attr(target_os = "windows", windows_subsystem = "windows")]
+
 mod common;
 mod config;
 mod models;
@@ -10,6 +12,22 @@ use rpc::{JsonRpcError, JsonRpcRequest, JsonRpcResponse};
 use serde_json::{json, Value};
 use std::collections::HashMap;
 use std::io::{self, BufRead, Write};
+
+#[cfg(target_os = "windows")]
+fn hide_console_window() {
+    use windows_sys::Win32::System::Console::GetConsoleWindow;
+    use windows_sys::Win32::UI::WindowsAndMessaging::{ShowWindow, SW_HIDE};
+
+    unsafe {
+        let console = GetConsoleWindow();
+        if !console.is_null() {
+            ShowWindow(console, SW_HIDE);
+        }
+    }
+}
+
+#[cfg(not(target_os = "windows"))]
+fn hide_console_window() {}
 
 fn get_required<'a>(params: &'a Value, key: &str) -> Result<&'a Value, String> {
     params
@@ -290,6 +308,8 @@ async fn dispatch(method: &str, params: Value) -> Result<Value, String> {
 
 #[tokio::main]
 async fn main() {
+    hide_console_window();
+
     let stdin = io::stdin();
 
     for line in stdin.lock().lines() {
