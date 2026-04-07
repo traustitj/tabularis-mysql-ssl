@@ -1,0 +1,8 @@
+{
+  "ssl_ca": "./certs/ca.pem",
+  "ssl_cert": "./certs/client-cert.pem",
+  "ssl_key": "./certs/client-key.pem",
+  "ssl_mode": "verify_ca",
+  "max_connections": 5,
+  "max_blob_size": 104857600
+}

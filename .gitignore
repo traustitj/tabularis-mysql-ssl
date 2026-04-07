@@ -1,0 +1,18 @@
+# Rust build artifacts
+/target/
+
+# Packaged release artifacts
+/dist/
+
+# Editor settings
+/.vscode/
+
+# Local plugin runtime config
+/mysqlssl-plugin.config.json
+
+# Local TLS test certs
+/docker/mysql-tls/certs/
+
+# OS files
+Thumbs.db
+.DS_Store

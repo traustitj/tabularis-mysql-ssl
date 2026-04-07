@@ -1,0 +1,108 @@
+{
+  "$schema": "https://tabularis.dev/schemas/plugin-manifest.json",
+  "id": "mysqlssl",
+  "name": "MySQL SSL",
+  "version": "0.2.0",
+  "description": "MySQL and MariaDB driver with PEM TLS client certificate support.",
+  "default_port": 3306,
+  "default_username": "root",
+  "executable": "mysqlssl-plugin",
+  "capabilities": {
+    "schemas": false,
+    "views": true,
+    "routines": true,
+    "file_based": false,
+    "folder_based": false,
+    "connection_string": true,
+    "connection_string_example": "mysql://user:pass@localhost:3306/db",
+    "identifier_quote": "`",
+    "alter_primary_key": true,
+    "auto_increment_keyword": "AUTO_INCREMENT",
+    "serial_type": "",
+    "inline_pk": false,
+    "alter_column": true,
+    "create_foreign_keys": true,
+    "no_connection_required": false,
+    "manage_tables": true,
+    "readonly": false
+  },
+  "settings": [
+    {
+      "key": "ssl_mode",
+      "label": "SSL Mode",
+      "type": "select",
+      "default": "required",
+      "options": ["disabled", "preferred", "required", "verify_ca", "verify_identity"],
+      "description": "TLS mode used for MySQL connections. verify_ca and verify_identity require a CA certificate."
+    },
+    {
+      "key": "ssl_ca",
+      "label": "CA Certificate Path",
+      "type": "string",
+      "description": "Absolute path, or a path relative to the plugin directory, to the PEM CA certificate used to validate the server."
+    },
+    {
+      "key": "ssl_cert",
+      "label": "Client Certificate Path",
+      "type": "string",
+      "description": "Absolute path, or a path relative to the plugin directory, to the PEM client certificate."
+    },
+    {
+      "key": "ssl_key",
+      "label": "Client Key Path",
+      "type": "string",
+      "description": "Absolute path, or a path relative to the plugin directory, to the PEM client private key."
+    },
+    {
+      "key": "max_connections",
+      "label": "Max Connections",
+      "type": "number",
+      "default": 5,
+      "description": "Maximum number of pooled MySQL connections kept by the plugin process."
+    },
+    {
+      "key": "max_blob_size",
+      "label": "Max Blob Size",
+      "type": "number",
+      "default": 104857600,
+      "description": "Largest BLOB value, in bytes, that the plugin will fetch or write through the grid and blob helpers."
+    }
+  ],
+  "data_types": [
+    { "name": "TINYINT", "category": "numeric", "requires_length": false, "requires_precision": false },
+    { "name": "SMALLINT", "category": "numeric", "requires_length": false, "requires_precision": false },
+    { "name": "MEDIUMINT", "category": "numeric", "requires_length": false, "requires_precision": false },
+    { "name": "INTEGER", "category": "numeric", "requires_length": false, "requires_precision": false },
+    { "name": "BIGINT", "category": "numeric", "requires_length": false, "requires_precision": false },
+    { "name": "DECIMAL", "category": "numeric", "requires_length": false, "requires_precision": true, "default_length": "10,2" },
+    { "name": "FLOAT", "category": "numeric", "requires_length": false, "requires_precision": false },
+    { "name": "DOUBLE", "category": "numeric", "requires_length": false, "requires_precision": false },
+    { "name": "CHAR", "category": "string", "requires_length": true, "requires_precision": false, "default_length": "10" },
+    { "name": "VARCHAR", "category": "string", "requires_length": true, "requires_precision": false, "default_length": "255" },
+    { "name": "TINYTEXT", "category": "string", "requires_length": false, "requires_precision": false },
+    { "name": "TEXT", "category": "string", "requires_length": false, "requires_precision": false },
+    { "name": "MEDIUMTEXT", "category": "string", "requires_length": false, "requires_precision": false },
+    { "name": "LONGTEXT", "category": "string", "requires_length": false, "requires_precision": false },
+    { "name": "BOOLEAN", "category": "other", "requires_length": false, "requires_precision": false },
+    { "name": "DATE", "category": "date", "requires_length": false, "requires_precision": false },
+    { "name": "TIME", "category": "date", "requires_length": false, "requires_precision": false },
+    { "name": "DATETIME", "category": "date", "requires_length": false, "requires_precision": false },
+    { "name": "TIMESTAMP", "category": "date", "requires_length": false, "requires_precision": false },
+    { "name": "YEAR", "category": "date", "requires_length": false, "requires_precision": false },
+    { "name": "JSON", "category": "json", "requires_length": false, "requires_precision": false },
+    { "name": "BINARY", "category": "binary", "requires_length": true, "requires_precision": false, "default_length": "255" },
+    { "name": "VARBINARY", "category": "binary", "requires_length": true, "requires_precision": false, "default_length": "255" },
+    { "name": "TINYBLOB", "category": "binary", "requires_length": false, "requires_precision": false },
+    { "name": "BLOB", "category": "binary", "requires_length": false, "requires_precision": false },
+    { "name": "MEDIUMBLOB", "category": "binary", "requires_length": false, "requires_precision": false },
+    { "name": "LONGBLOB", "category": "binary", "requires_length": false, "requires_precision": false },
+    { "name": "GEOMETRY", "category": "spatial", "requires_length": false, "requires_precision": false },
+    { "name": "POINT", "category": "spatial", "requires_length": false, "requires_precision": false },
+    { "name": "LINESTRING", "category": "spatial", "requires_length": false, "requires_precision": false },
+    { "name": "POLYGON", "category": "spatial", "requires_length": false, "requires_precision": false },
+    { "name": "MULTIPOINT", "category": "spatial", "requires_length": false, "requires_precision": false },
+    { "name": "MULTILINESTRING", "category": "spatial", "requires_length": false, "requires_precision": false },
+    { "name": "MULTIPOLYGON", "category": "spatial", "requires_length": false, "requires_precision": false },
+    { "name": "GEOMETRYCOLLECTION", "category": "spatial", "requires_length": false, "requires_precision": false }
+  ]
+}
